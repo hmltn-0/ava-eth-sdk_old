@@ -1,4 +1,9 @@
-Contact:
+1. What is "EigenLayer"?
+2. What kind of "aggregation" is occurring? Is it the aggregation of operator transmissions, as a form of network broadcasting?
+3. Is grpc a protocol?
+4. Why does Eignlayer off "telemetry monitoring"? Of what, the blockchain? How so?
+
+
 - Email: developers@avaprotocol.org
 - Twitter: https://x.com/ava_protocol
 - Telegram: https://t.me/ava_protocol
@@ -6,41 +11,47 @@ Contact:
 - LinkedIn: https://www.linkedin.com/company/avaprotocol
 - Github: https://github.com/AvaProtocol/
 
-# EigenLayer Operator
-- aggregator and telemetry monitoring
-- Operators communicate with aggregators
-  - through gRPC.
-- requests task data from aggregator,
-- it performs condition execution
+- Operstors request task data from aggregators
+- Operators perform condition executions
 - to check whether a task can be triggered
-- The result is sent back to aggregator.
-- aggregator will handle book keeping
-- for the off-chain storage,
--  and on-chain storage.
-- running an operator will not require
--  to top-up
--  the operator ECDSA
--  or alias key.
--  Operator
--  that is connected to Ava Protocol
--  aggregator
--  can also check
--  their operator
--  on our telemetry dashboard
--  as below:
-- Testnet(Holesky):
+    - For example, what kinds of conditions?
+
+- How do I just start using Ava AVS? With protobuf, or grpc?
+
+
+- The result is sent back to aggregator
+- Aggregators handle book-keeping
+- for off-chain storag
+- and on-chain storage
+
+
+- running an operator does not require
+- topping up
+- the operator ECDSA
+- or alias key.
+
+What is "topping up an ECDSA or alias key"?
+
+Can individuals run either operators or aggregators with the Ava Protocol / AVS?
+
+
+- An operator that is connected to an Ava Protocol aggregator
+- can also check their operator on our telemetry dashboard:
+- Holesky is a test network:
 - https://aggregator-holesky.avaprotocol.org/telemetry
-- Mainnet:
+- This is the main network:
 - https://aggregator.avaprotocol.org/telemetry
 
-- Automation on Ethereum
 - Ava Protocol automates processes on Ethereum
-- Ava Protocol is hub for cross-chain automation,
-- enabling multi-chain apps
-- to schedule and automate
-- any EVM-based transaction
-- or smart contract function.
--  It delivers
+- Ava Protocol is a hub for cross-chain automation,
+
+How is it cross-chain if it only automates Ethereum?
+
+
+- enabling multi-chain apps to schedule and automate
+- any EVM-based transaction or smart contract function.
+
+It delivers
 -  trustless
 -  automation
 -   by dedicating
@@ -1041,42 +1052,103 @@ And with that, you've just greatly improved the security posture of your node. C
 
 ================================================================================
 
-Ava Protocol EigenLayer AVS Explained
-An in-depth explanation of the Ava Protocol EigenLayer AVS, covering its architecture, setup, and operational guidelines.
-Overview
-The Ava Protocol AVS (Actively Validated Service) can be compiled directly using Go version 1.22+. Ensure you have the appropriate version of Go installed in your development environment.
-How It Works
-User Wallet
-For each owner, an ERC6900 wallet is deployed to schedule tasks and approve spending. Each task type has its corresponding modular code to represent its condition and actual execution.
-Aggregator
-The aggregator accepts RPC requests from clients to submit task payloads. Currently, the Ava Protocol team manages and runs the aggregator. Periodically, the aggregator combines task submissions, updates internal storage, and writes a zkSNARK proof back to our TaskManager contract.
-The aggregator also accepts task condition check results from the operator, performs quorum and consensus checks, and flags tasks as ready to run.
-Aggregator Address
-The Ava Protocol team currently manages the aggregator. Depending on whether you are on the testnet or mainnet, point your operator to the appropriate address in the operator configuration file.
-Holesky Testnet
-- AVS node: aggregator-holesky.avaprotocol.org:2206
+
+
+
+- Ava Protocol EigenLayer AVS Explained
+- An in-depth explanation
+- of the Ava Protocol
+- EigenLayer AVS,
+- covering its architecture,
+- setup,
+-  and operational guidelines.
+-   The Ava Protocol AVS
+-    (Actively Validated Service)
+-  can be compiled directly
+-  using Go version 1.22+.
+-  Ensure you have the appropriate version
+-  of Go installed
+-  in your development environment.
+
+Does this mean they already have an SDK in Go?
+Look up "advice on building an SDK"
+
+
+- For each owner, an ERC6900 wallet
+- is deployed
+- to schedule tasks
+- and approve spending.
+- Each task type
+- has its corresponding
+- modular code
+- to represent its condition
+- and actual execution.
+- The aggregator accepts
+- RPC requests
+- from clients
+-  to submit task payloads.
+-  Currently, the Ava Protocol team
+-  manages and runs
+-  the aggregator.
+-  Periodically, the aggregator combines
+-  task submissions,
+-   updates internal storage,
+-   and writes a zkSNARK proof
+-   back to our TaskManager contract.
+-   The aggregator
+-   also accepts task condition check results
+-   from the operator,
+-   performs quorum and consensus checks,
+-   and flags tasks as ready to run.
+-   The Ava Protocol team currently manages
+-   the aggregator.
+-   Depending on whether you are
+-   on the testnet or mainnet,
+-   point your operator
+-   to the appropriate address
+-   in the operator
+-   configuration file.
+-   AVS node: aggregator-holesky.avaprotocol.org:2206
 - API Explorer: https://api-explorer-holesky.avaprotocol.org/
-Mainnet
 - AVS node: aggregator.avaprotocol.org:2206
 - API Explorer: https://api-explorer.avaprotocol.org/
-Operators
-Operators communicate with aggregators via RPC. They request task data from the aggregator, execute condition checks, and send results back to the aggregator. For tasks deemed ready to run, operators execute them. Detailed information on task execution through our ERC6900 modular wallet will be available soon.
-Setting Up
-Check Go Version
-Verify the installed Go version:
-go version
-Compile Ava Protocol AVS
-Compile the AVS using the following command:
-go build -o ap-avs
-You can then run the ap-avs binary. We strive to use pure Go, allowing cross-compilation for any architecture supported by the Go compiler.
-Running the Operator
-Refer to the operator documentation for detailed instructions.
-Running the Aggregator
-To run the aggregator, use the following command:
-ap-avs aggregator
-Note: The Ava Protocol team currently manages the aggregator, and the IP address for communication between the operator and the aggregator is hardcoded in the operator.
-Telemetry Dashboard
-Operators connected to the Ava Protocol aggregator can monitor their operations on the telemetry dashboard.
+- Operators communicate with aggregators
+- via RPC.
+- They request task data
+- from the aggregator,
+- execute condition checks,
+- and send results back
+- to the aggregator.
+- For tasks deemed ready to run,
+- operators execute them.
+- Detailed information on task execution
+- through our ERC6900 modular wallet
+- will be available soon.
+
+- a sample for how to make an SDK?
+- Check Python Version
+- Verify the installed Python version:
+- python3 --version ?
+- Download and install the AVS Python SDK using the following command:
+- pip3 instal / brew install
+- You can then run the ap-avs binary.
+- We strive to use pure Go,
+- allowing cross-compilation
+- for any architecture
+- supported by the Go compiler.
+- Refer to the operator documentation
+- for detailed instructions.
+- To run the aggregator,
+-  use the following command:
+-  ap-avs aggregator
+-  Note: The Ava Protocol team
+-  currently manages the aggregator,
+-  and the IP address for communication
+-   between the operator and the aggregator
+-   is hardcoded in the operator.
+-   Operators connected to the Ava Protocol aggregator
+-   can monitor their operations
+-   on the telemetry dashboard.
 Testnet
 https://aggregator-holesky.avaprotocol.org/telemetry
 Mainnet
