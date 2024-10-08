@@ -1,42 +1,146 @@
-Ways to Contact Us
-Reach out to the Ava Protocol team through email, Twitter, Telegram, Discord, LinkedIn, or GitHub. Our decentralized team typically responds within 8 hours.
-Please contact us through below methods. Our decentralized team can usually respond within 8 hours.
+Contact:
 - Email: developers@avaprotocol.org
 - Twitter: https://x.com/ava_protocol
 - Telegram: https://t.me/ava_protocol
 - Discord: https://discord.gg/7W9UDvsbwh
 - LinkedIn: https://www.linkedin.com/company/avaprotocol
 - Github: https://github.com/AvaProtocol/
-For update suggestions of this documentation site, please create a Github Issue.
-Thank you!
 
-================================================================================
+# EigenLayer Operator
+- aggregator and telemetry monitoring
+- Operators communicate with aggregators
+  - through gRPC.
+- requests task data from aggregator,
+- it performs condition execution
+- to check whether a task can be triggered
+- The result is sent back to aggregator.
+- aggregator will handle book keeping
+- for the off-chain storage,
+-  and on-chain storage.
+- running an operator will not require
+-  to top-up
+-  the operator ECDSA
+-  or alias key.
+-  Operator
+-  that is connected to Ava Protocol
+-  aggregator
+-  can also check
+-  their operator
+-  on our telemetry dashboard
+-  as below:
+- Testnet(Holesky):
+- https://aggregator-holesky.avaprotocol.org/telemetry
+- Mainnet:
+- https://aggregator.avaprotocol.org/telemetry
 
-EigenLayer Operator Overview
-An overview of the role and functions of Ava Protocol's EigenLayer Operators, including interaction with aggregator and telemetry monitoring.
-Operators communicates with aggregators through gRPC. It requests task data from aggregator, it performs condition execution to check whether a task can be trigger. The result is then sent back to aggregator. The aggregator will handle book keeping for the off-chain storage, and on-chain storage.
-Therefore, running an operator will not require to top-up the operator ECDSA or alias key.
-Operator that is connected to Ava Protocol aggregator can also check their operator on our telemetry dashboard as below
-- Testnet(Holesky): https://aggregator-holesky.avaprotocol.org/telemetry
-- Mainnet: https://aggregator.avaprotocol.org/telemetry
-
-================================================================================
-
-Automation on Ethereum Explained
-Gain a clear understanding of how Ava Protocol automates processes on Ethereum. Start your journey with our comprehensive guide.
-Introduction
-Ava Protocol is Web3’s hub for cross-chain automation, enabling multi-chain apps to schedule and automate any EVM-based transaction or smart contract function. It delivers trustless automation by dedicating block space and optimizing gas usage to store and execute transactions across connected blockchains.
-This automation engine combines off-chain data streams and event-driven execution to trigger transactions on Ava Protocol and connected blockchains — all without handling tokens or private keys. Ava Protocol enables fluid user experiences like scheduled and recurring payments, stable-cost averaging, stop-loss orders, and auto-compounding rewards for staking, liquidity pools, and money market deposits.
-Ava Protocol provides automation infrastructure for decentralized applications (dapps) to manage single or recurring transactions using simple "if this, then that" logic.
-Modular and Composable Technical Stack
-Ava Protocol’s technical stack offers a suite of robust, customizable, and interoperable tools designed to streamline and secure the development and management of decentralized applications.
-1. Studio
-The Studio is a highly customizable interface for creating, designing, and managing automated trading strategies and asset management workflows.
-Technical Details
-- Customization and Flexibility: The Studio provides a drag-and-drop interface that allows users to build and adjust trading strategies without coding. This flexibility lets users tailor strategies to fit specific needs and market conditions.
-- Integration with APIs: It integrates seamlessly with various financial data APIs, providing access to real-time and historical market data, along with other essential metrics necessary for informed decision-making.
-- Backtesting and Simulation: The Studio offers robust backtesting tools that enable users to test strategies against historical data and evaluate their effectiveness before live deployment.
-- Automation and Scheduling: Users can automate their strategies to execute trades based on specific times or market conditions, improving efficiency and responsiveness.
+- Automation on Ethereum
+- Ava Protocol automates processes on Ethereum
+- Ava Protocol is hub for cross-chain automation,
+- enabling multi-chain apps
+- to schedule and automate
+- any EVM-based transaction
+- or smart contract function.
+-  It delivers
+-  trustless
+-  automation
+-   by dedicating
+-   block space
+-   and optimizing gas usage
+-   to store
+- and execute
+- transactions
+- across connected blockchains.
+- This automation engine
+- combines off-chain
+- data streams
+- and event-driven
+- execution
+- to trigger
+- transactions
+- on Ava Protocol
+- and connected blockchains —
+- all without handling tokens
+- or private keys.
+- Ava Protocol
+- enables fluid user experiences
+- like scheduled
+- and recurring payments,
+- stable-cost averaging,
+- stop-loss orders,
+- and auto-compounding rewards
+- for staking,
+- liquidity pools,
+- and money market deposits.
+- Ava Protocol
+- provides
+- automation infrastructure
+- for decentralized applications
+- (dapps)
+- to manage
+- single or recurring transactions
+- using simple
+- "if this, then that"
+- logic.
+- Modular
+- and Composable Technical Stack
+- Ava Protocol’s technical stack
+- offers a suite
+- of robust,
+- customizable,
+- and interoperable tools
+- designed to streamline
+- and secure the development
+- and management of
+- decentralized applications.
+- The Studio
+- is a highly customizable interface
+- for creating,
+- designing,
+- and managing
+- automated trading strategies
+- and asset management
+- workflows.
+- Customization
+- and Flexibility:
+- The Studio
+- provides a drag-and-drop interface
+- that allows users
+-  to build and adjust
+-  trading strategies
+-  without coding.
+-  This flexibility
+-  lets users
+-  tailor strategies
+-  to fit
+-  specific needs
+-  and market conditions.
+- Integration
+- with APIs:
+- It integrates
+- seamlessly
+- with various financial data APIs,
+- providing access
+-  to real-time
+-  and historical market data,
+- along with
+- other essential metrics
+- necessary for
+- informed decision-making.
+- Backtesting
+- and Simulation:
+- The Studio offers
+- robust backtesting tools
+- that enable users
+- to test strategies
+- against historical data
+- and evaluate their effectiveness
+- before live deployment.
+- Automation
+- and Scheduling:
+- Users can automate their strategies
+- to execute trades
+- based on specific times
+- or market conditions, improving efficiency and responsiveness.
 - Security and Compliance: The Studio adheres to stringent security protocols to protect user data and transactions while supporting compliance with relevant financial regulations and standards.
 2. Modular SDK
 The Ava Protocol SDK (Software Development Kit) provides modular and easy-to-use tools for integrating seamless and secure private transactions into dapps and services.
