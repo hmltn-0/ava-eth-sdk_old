@@ -1477,56 +1477,163 @@ Head to api reference Learn how to schedule task with our aggregator gRPC.
 
 ================================================================================
 
-Securing with Alias Key
-Learn how to secure your EigenLayer operator with an Alias Key, enhancing security by protecting the operator ECDSA key during interactions with Ava Protocol.
-The operator ECDSA key allows access to funds under that account. Optionally, you can use a different ECDSA key pair from your EigenLayer operator ECDSA key and bind this new alias key to your operator. This way, your operator can use the new alias key to interact with the Ava Protocol whereas the AP AVS software will not have access to your operator ECDSA key.
-The process includes two steps:
-- Generate or import an existing ECDSA key to create an alias key.
-- Bind the alias key to your operator ECDSA key.
-While it's not necessary to perform these steps, doing so enhances security by ensuring that your operator ECDSA key remains protected.
-You do need access to the operator ECDSA key to perform below steps.
-Pre-requirement
-- You have clone https://github.com/AvaProtocol/ap-operator-setup into your hard drive
-- You have finished the operator registering to AP AVS.
-Generate alias key
-We will generate an alias key and temporarily put them in a folder call keys
-. You will move them to the right location later.
-# create the temp directory to hold the generated keys
-mkdir keys
-docker compose run -v `pwd`/keys:/app/keys/ ap-operator --config=/app/config.yaml create-alias-key --name=/app/keys/alias-ecdsa.key.json
-A file call alias-ecdsa.key.json should be created inside the keys directory. You can move it to the right place on your node. This will be your alias key moving forward.
-This key share the same password with your original EigenLayer Operator key.
-Declare the alias key for your operator
-Now, we will send an on-chain transaction from your operator ECDSA key to bind the newly generated alias key to it.
-Ensure your operator ECDSA key has some fund in it to pay for the gas fee.
-docker compose run -v path-to-the-alias-ecdsa-key.json-above-on-your-node:/app/keys/alias-ecdsa.key.json ap-operator declare-alias --config=/app/config.yaml --name=/app/keys/alias-ecdsa.key.json
-You should see a message like this at the end.
-succesfully declared an alias for operator [your-operator-keys] alias address [your-alias-address-key] at tx [tx-hash]
-Now, in your .env file, you can replace ECDSA_KEYSTORE_PATH, which is pointed to your operator ECDSA key, to point to the path of the alias key we just create in above step.
-ECDSA_KEYSTORE_PATH=<path-to-the-above-alias-ecdsa-key-file-above>
-You're all set to move forward with running your operator using this alias key. At any given time, you can also just change the ECDSA_KEYSTORE_PATH to point to your original operator ECDSA key to perform operation that require the operator ECDSA key. Usually, only the registraion and deregistration require that key.
-Because the operator run inside a docker container, it can only access what file we mounted into it. And with the above step, your EigenLayer operator key isn't mounted into the container at run time, only the alias key. Therefore, your key are secured and not expose to the AP AVS during life-cycke of the AP AVS Operator container.
+- Securing with Alias Key
+- Learn how to secure your EigenLayer operator
+- with an Alias Key,
+- enhancing security
+- by protecting the operator
+- ECDSA key
+- during interactions with Ava Protocol.
+- The operator ECDSA key
+- allows access
+- to funds under that account.
+-  Optionally,
+-  you can use a different ECDSA key pair
+-  from your EigenLayer operator
+-  ECDSA key
+-  and bind this new alias key
+-  to your operator.
+-  This way,
+-  your operator can use the new alias key
+-  to interact with the Ava Protocol
+-  whereas the AP AVS software
+-  will not have access
+-   to your operator ECDSA key.
+-   The process includes two steps:
+- Generate or import
+- an existing ECDSA key
+- to create an alias key.
+- Bind the alias key
+-  to your operator ECDSA key.
+-  While it's not necessary
+-  to perform these steps,
+-  doing so enhances security
+-  by ensuring that your operator ECDSA key
+-  remains protected.
+-  You do need access to the operator ECDSA key
+-  to perform below steps.
+-  clone  https://github.com/AvaProtocol/ap-operator-setup
+-  into your hard drive
+- You have finished
+- the operator registering
+- to AP AVS.
+- Generate alias key
+- We will generate an alias key
+- and temporarily put them
+- in a folder called  keys
+- You will move them to the right location
+- later.
+- create the temp directory
+- to hold the generated keys
+- mkdir keys
+- docker compose
+- run -v
+-  `pwd`/keys:/app/keys/
+-  ap-operator
+-  --config=/app/config.yaml
+-  create-alias-key
+-  --name=/app/keys/
+-  alias-ecdsa.key.json
+-  A file called alias-ecdsa.key.json
+-  should be created
+-  inside the keys directory.
+-  You can move it to the right place
+-  on your node.
+-  This will be your alias key
+-   moving forward.
+-   This key shares
+-   the same password
+-   with your original
+-   EigenLayer Operator key.
+-   Declare the alias key for your operator
+-   Now, we will send an on-chain transaction
+-   from your operator ECDSA key
+-   to bind the newly generated alias
+-   key to it.
+-   Ensure your operator ECDSA key
+-   has some fund in it
+-   to pay for the gas fee.
+-   docker compose run
+-    -v path-to-the-alias-ecdsa-key.json-above-on-your-node:
+-    /app/keys/alias-ecdsa.key.json
+-    ap-operator
+-    declare-alias
+-    --config=/app/config.yaml
+-    --name=/app/keys/alias-ecdsa.key.json
+- You should see a message like this at the end.
+- succesfully declared an alias
+- for operator [your-operator-keys]
+- alias address [your-alias-address-key] at tx [tx-hash]
+- Now, in your .env file,
+- you can replace ECDSA_KEYSTORE_PATH,
+- which is pointed to your
+- operator ECDSA key,
+- to point to the path
+- of the alias key
+- we just created
+-  in above step.
+-  ECDSA_KEYSTORE_PATH=
+-  <path-to-the-above-alias-ecdsa-key-file-above>
+- You're all set to move forward
+- with running your operator
+- using this alias key.
+- At any given time,
+- you can also just change
+- the ECDSA_KEYSTORE_PATH
+- to point to your original operator
+- ECDSA key
+- to perform operation
+- that require the operator
+- ECDSA key.
+-  Usually, only the registraion
+-  and deregistration
+-  require that key.
+-  Because the operator
+-  runs inside a docker container,
+-  it can only access
+-  what file we mounted into it.
+-  And with the above step,
+-  your EigenLayer operator key
+-  isn't mounted into the container
+-  at run time,
+-  only the alias key.
+-  Therefore, your key are secured
+-  and not expose
+-  to the AP AVS
+-  during life-cycke
+-  of the AP AVS Operator
+-  container.
 
-================================================================================
+Try to add this to the SDK:
 
-FAQ
-Explore frequently asked questions about Ava Protocol, covering its features, benefits, integration with DeFi platforms, and more.
-Frequently Asked Questions
-What is Ava Protocol?
-Ava Protocol is an event-driven EigenLayer AVS that enables seamless autonomous transactions for Ethereum and beyond. It empowers developers to improve crypto transactions with intelligent automation, enhanced privacy, effortless composability, and significant cost savings.
-How does Ava Protocol help DeFi developers?
-Ava Protocol automates key aspects of DeFi development, such as on-chain interest rate updates, liquidity management, and liquidation processes. This reduces the need for manual monitoring, lowers operational costs, and improves platform reliability.
-How does Ava Protocol enhance DeFi platforms?
-Ava Protocol improves platform reliability by automating functions and optimizing processes. This saves developers time, reducing inefficiencies and allowing them to focus on innovation. Ava Protocol ensures timely updates, precise liquidations, and streamlined operations.
-Can Ava Protocol integrate with existing DeFi platforms?
-Ava Protocol supports both Ethereum and Polkadot, providing broad compatibility with existing applications and services. Developers can seamlessly integrate automation and advanced transaction functionalities across EVM-compatible and Substrate-based chains.
-How does Ava Protocol ensure transaction privacy and security?
-Ava Protocol enhances transaction privacy and security through advanced MEV (Maximal Extractable Value) protection mechanisms. This approach prevents external entities from intercepting or manipulating transactions, ensuring that transactions are confidential and shielded from front-running and other malicious activities.
-Who can benefit from Ava Protocol?
-Ava Protocol's enhanced automation benefits developers, DeFi traders, gaming projects, NFT artists, real-world asset applications, and users of practically any web3 vertical. By empowering seamless automation through super-transactions, Ava Protocol opens up new possibilities and use cases across the web3 ecosystem.
-How can I get started with Ava Protocol?
-You can start by trying our testnet. Visit Ava Protocol Testnet to begin exploring the features and capabilities of Ava Protocol.
-For additional questions or suggestions to improve this documentation, please create a GitHub Issue on our Repository.
-
-================================================================================
-
+- on-chain interest rate updates,
+- liquidity management
+- liquidation processes.
+- This reduces the need for manual monitoring,
+- lowers operational costs,
+- and improves platform reliability.
+- Can Ava Protocol integrate with existing DeFi platforms?
+- Ava Protocol supports both Ethereum and Polkadot,
+- providing broad compatibility
+- with existing applications and services.
+- Developers can seamlessly integrate
+- automation and advanced transaction functionalities
+- across EVM-compatible
+- and Substrate-based chains.
+- Ava Protocol enhances transaction privacy and security
+- through advanced MEV (Maximal Extractable Value) protection mechanisms.
+- This approach prevents external entities
+- from intercepting or manipulating transactions,
+-  ensuring that transactions are confidential
+-  and shielded from front-running
+-  and other malicious activities.
+-  Consider making a demo function or example fir eacj of the followingpeople / applications:
+- developers,
+-  DeFi traders,
+-  gaming projects,
+-  NFT artists,
+-  real-world asset applications,
+-  users of practically any web3 vertical
+-  You can start by trying our testnet.
+-  For additional questions or suggestions to improve this documentation,
+-  please create a GitHub Issue on our Repository
