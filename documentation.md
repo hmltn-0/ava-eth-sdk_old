@@ -226,97 +226,515 @@ Contact:
 - an innovative
 - restaking protocol
 - that leverages
-- Ethereum's pooled cryptoeconomic security.
-Why We Chose EigenLayer
-- Network Security: EigenLayer utilizes restaked ETH to validate decentralized services, ensuring that the network is secure and resistant to attacks.
-- Event-Driven Architecture: Event-driven activation is a key AVS use case supported by EigenLayer, triggering actions for real-time applications based on specific events.
-- Off-chain computation and storage: The off-chain resources of EigenLayer operators allow Ava Protocol to tailor data structures for efficient, event-driven activation, providing scalability for complex computations and data management.
-- Scalability and Efficiency: EigenLayer is designed to be highly scalable, capable of handling high volumes of transactions and events without performance issues.
-- Inclusion Guarantees: The network ensures that all valid transactions and events are included in the blockchain, maintaining integrity and reliability.
-- Cross-Chain interoperability: With connectivity facilitated by different AVSs in the EigenLayer ecosystem, such as oracles and bridges, Ava Protocol can validate Layer-2s and EVM-compatible chains, offering automation services to a range of dapps and services.
-EigenLayer jumpstarts the launch of Ava Protocol's super-transactions service on Ethereum, rapidly providing a secure network and proof-of-stake consensus method to guarantee the accuracy of automations.
-How Ava Protocol Is Different
-- No more wrapped assets：Assets are supported by the chain directly, eliminating the need for them to be locked in a single smart contract.
-- Eliminate off-chain servers: Repetitive transactions can be triggered by on-chain event modules.
-- No private key custody: Once set up, on-chain transactions can be triggered automatically without further input.
-- Chain-level security: Unlike EVM smart contracts, core utility functions are secured by the network.
-- Execution guarantees: Users can be assured that their events will reliably execute based on specific conditions.
-Ava Protocol Ecosystem
-Ava Protocol has integrated with a diverse range of dapps and services that showcase the versatility and potential of our automation solutions.
-- Web3Go: Enabling data analytics and insights for blockchain networks, helping developers make informed decisions.
-- Bagpipes: A no-code DeFi automation tool that allows users to create custom cross-chain workflows with ease.
-- ACE: Providing advanced tools for asset management and trading strategy automation.
-- YieldBay: Offering auto-compounding solutions to maximize returns for liquidity pool participants.
-- Mangata X: Facilitating cross-chain trading with minimal slippage and high efficiency.
-- YieldBoot: Automating yield farming strategies to optimize returns across multiple DeFi platforms.
-These dapps leverage Ava Protocol’s advanced features — such as seamless integration with off-chain data, event-driven automation, and secure transaction execution — to deliver exceptional user experiences and drive the next wave of blockchain innovation.
-
-================================================================================
-
-Secure your Node
-Optional steps to enhance the security of your EigenLayer operator, including SSH configuration, firewall setup, and more.
-The goal of this guide is to walk you through steps you can take to secure your node against malicious actors. Whether you're running a local server at home or a VPS server / virtual machine on the cloud, the tips here will help you harden your node against outside attack and help protect it during its lifespan.
-This section will describe both essential actions, which you must take, and nice-to-have actions, which are helpful but not required.
-Note:This guide is meant to be an introduction to some of the things you can do to harden your node machine. If you are comfortable with the command-line terminal and want to go even further in protecting your node, take a look at the popular imthenachoman/How-To-Secure-A-Linux-Server guide.
-Assumptions in This Guide
-This guide assumes your node runs Ubuntu 20.04 LTS
-. The concepts will carry over to other systems but the example commands may not.
-As with all of the commands in this guide, we assume that you are connecting remotely to your node's command terminal using ssh
-. If you need a refresher on how to use ssh
-, take a look at the Intro to Secure Shell guide first.
-Essential: Keep your Operator Machine Secure
-Warning: If you use your node locally (by physically logging into it with a keyboard and monitor directly attached to it), then this section is not relevant to you - you can skip it.
-Most operators interact with their node remotely by connecting to its terminal from another computer using ssh
-:
-- The machine you connect to (in this case, your node machine) is called the server.
-- The machine you connect from (such as your laptop, desktop, or even your phone) is the client.
-One of the most important things you can do to secure your node is to keep your operator machine secure. If your operator machine is compromised and you use it to log into your node, then most of the security settings you apply to the node can be bypassed.
-For example: if you use a laptop as an SSH client, and it has a keylogger installed, then any secret things you type on the node (such as your password or recovery mnemonic) when connected via SSH will be stolen.
-There is no definitive guide to keeping your operator machine secure, but being aware that it is a factor in your security is a good first step. Make sure that your operator machine is as secure as it can be.
-Here are a few tips:
-- Don't use your operator machine for risky activities (such as visiting untrustworthy websites or installing unnecessary programs)
-- Keep your operator machine updated with the latest security patches
-- If possible, use a malware and antivirus protection program for your Operating System
-For maximum security, you may want to use a dedicated machine as your SSH client, though this may not be practical for you.
-Essential: Secure your SSH Access
-Warning: If you use your node locally (by physically logging into it with a keyboard and monitor directly attached to it), then this section is not relevant to you - you can skip it.
-Whether you run your node at home or use a VPS in a remote datacenter, it is likely that you access it through SSH, or that SSH is enabled even if you do not use it.
-SSH connections are based on secure cryptography, but as with any secure system, the real security comes from using it correctly. There are two main things to do for your SSH settings:
-- Use an SSH key to log in remotely instead of a username and password
-- Disable password-based authentication entirely, so SSH keys are the only remote login option
-As you are probably familiar with now, the default way to log into your node via SSH is with a username and password. The downside of this is that your password is typically something rather "short" and susceptible to brute-force attacks.
-Luckily, there is an alternative way to log in via SSH: an SSH key pair.
-SSH key pairs work similarly to blockchain wallets; they come with a public part (such as your wallet address) and a private part (the private key for your wallet address):
-- You provide the public part to your node. This way, the node knows you're allowed to connect to it, and it knows that it's really you trying to connect.
-- You keep the private part to yourself on your operator machine. This way, you (and only you) can connect to your node.
-- You can (and should!) protect the private part with a password, so someone who steals your key can't use it.
-- From a computer's perspective, the private key is exponentially harder to crack than a password is. This mitigates the risk of a brute-force attack against your node.
-Tip: If you'd like to learn more about SSH key pairs before creating your own, take a look at these links:
+- Ethereum's
+- pooled cryptoeconomic security.
+- Why We Chose EigenLayer
+- Network Security:
+-  EigenLayer utilizes
+-  restaked ETH
+-  to validate
+-  decentralized services,
+-  ensuring that the network
+-  is secure and resistant
+-  to attacks.
+- Event-Driven Architecture:
+-  Event-driven activation
+-  is a key AVS use case
+-  supported by EigenLayer,
+-  triggering actions
+-  for real-time applications
+-  based on specific events.
+- Off-chain computation
+- and storage:
+- The off-chain resources
+- of EigenLayer operators
+- allow Ava Protocol
+- to tailor data structures
+- for efficient,
+-  event-driven activation,
+-  providing scalability
+-  for complex computations
+-  and data management.
+- Scalability and Efficiency:
+- EigenLayer is designed
+- to be
+- highly scalable,
+- capable of handling
+- high volumes of transactions
+- and events
+- without performance issues.
+- Inclusion Guarantees:
+- The network ensures
+- that all valid transactions
+- and events
+- are included in the blockchain,
+-  maintaining integrity
+-  and reliability.
+- Cross-Chain interoperability:
+- With connectivity facilitated
+- by different AVSs
+- in the EigenLayer ecosystem,
+- such as oracles and bridges,
+- Ava Protocol
+- can validate
+- Layer-2s and
+- EVM-compatible chains,
+-  offering automation services
+-  to a range of dapps
+-   and services.
+-   EigenLayer jumpstarts
+-   the launch of
+-   Ava Protocol's
+-   super-transactions service
+-   on Ethereum,
+-   rapidly providing
+-   a secure network
+-   and proof-of-stake
+-   consensus method
+-   to guarantee
+-   the accuracy
+-   of automations.
+-   How Ava Protocol Is Different
+- No more wrapped assets：
+- Assets are supported
+- by the chain directly,
+- eliminating the need
+- for them to be locked
+- in a single smart contract.
+- Eliminate off-chain servers:
+- Repetitive transactions
+- can be triggered
+- by on-chain
+- event modules.
+- No private key custody:
+- Once set up,
+- on-chain transactions
+- can be triggered
+- automatically
+- without further input.
+- Chain-level security:
+- Unlike EVM smart contracts,
+- core utility functions
+- are secured by the network.
+- Execution guarantees:
+- Users can be assured
+- that their events
+- will reliably execute
+- based on specific conditions.
+- Ava Protocol Ecosystem
+- Ava Protocol
+- has integrated
+- with a diverse range
+- of dapps
+- and services
+- that showcase
+- the versatility
+- and potential
+- of our automation solutions.
+- Web3Go:
+- Enabling data analytics
+- and insights
+- for blockchain networks,
+- helping developers
+- make informed decisions.
+- Bagpipes:
+- A no-code DeFi automation tool
+-  that allows users
+-  to create
+-  custom cross-chain workflows
+-  with ease.
+- ACE:
+-  Providing advanced tools
+-  for asset management
+-  and trading strategy
+-  automation.
+- YieldBay:
+- Offering auto-compounding
+- solutions
+- to maximize returns
+- for liquidity pool
+- participants.
+- Mangata X:
+- Facilitating cross-chain
+- trading
+- with minimal slippage
+- and high efficiency.
+- YieldBoot:
+- Automating yield farming
+- strategies
+- to optimize returns
+- across multiple DeFi platforms.
+- These dapps leverage
+- Ava Protocol’s
+- advanced features —
+- such as seamless integration
+- with off-chain data,
+- event-driven automation,
+-  and secure transaction
+-  execution —
+-   to deliver
+-   exceptional user experiences
+-   and drive the next wave
+-   of blockchain innovation.
+- Optional steps
+- to enhance
+- the security
+- of your EigenLayer operator,
+-  including SSH configuration,
+-  firewall setup,
+-  and more.
+-  The goal of this guide
+-  is to walk you through
+-  steps you can take
+-   to secure your node
+-   against malicious actors.
+-   Whether you're running
+-   a local server at home
+-   or a VPS server /
+-   virtual machine
+-   on the cloud,
+-   the tips here
+-   will help you harden
+-   your node against
+-   outside attack
+-   and help protect
+-   it during its lifespan.
+-   This section will describe
+-   both essential actions,
+-    which you must take,
+-    and nice-to-have actions,
+-  which are helpful
+-   but not required.
+-   Note:This guide
+-   is meant to be an
+-   introduction to
+-   some of the things
+-   you can do
+-   to harden your
+-   node machine.
+-    If you are comfortable
+-    with the command-line
+-    terminal
+-    and want to go even further
+-    in protecting your node,
+-    take a look at the
+-    popular
+-    imthenachoman/
+-    How-To-Secure-A-Linux-Server
+-    guide.
+-    Assumptions in This Guide
+-    This guide assumes
+-    your node runs
+-    Ubuntu 20.04 LTS
+-  Theconcepts will carry over
+-  to other systems
+-  but the example commands
+-  may not.
+-  As with all of the commands
+-  in this guide,
+-  we assume that
+-  you are connecting remotely
+-  to your node's command terminal
+-  using ssh
+-  If you need a refresher
+-  on how to use ssh
+-   take a look at the
+-   Intro to Secure Shell guide
+-    first.
+-    Essential:
+-    Keep your Operator
+-    Machine Secure
+-    Warning: If you use your node
+-    locally
+-  (by physically logging into it
+-  with a keyboard
+-  and monitor
+-  directly attached to it),
+-   then this section
+-   is not relevant to you -
+-   you can skip it.
+-   Most operators
+-   interact with their node
+-   remotely by connecting to
+-   its terminal
+-   from another computer
+-   using ssh
+-   The machine you connect to
+-   (in this case,
+-   your node machine)
+-    is called the server.
+- The machine you connect from
+- (such as your laptop,
+- desktop, or even your phone)
+- is the client.
+- One of the most important
+- things you can do to
+- secure your node
+- is to keep your
+- operator machine secure.
+- If your operator machine
+- is compromised
+- and you use it to log into
+- your node,
+- then most of the security
+- settings you apply to the
+- node can be bypassed.
+- For example:
+- if you use a laptop
+- as an SSH client,
+- and it has a keylogger
+- installed,
+- then any secret things
+- you type on the node
+- (such as your password
+- or recovery mnemonic)
+- when connected via SSH
+- will be stolen.
+- There is no definitive guide
+- to keeping your
+- operator machine secure,
+- but being aware
+- that it is a factor
+- in your security
+- is a good first step.
+- Make sure that your operator
+- machine
+- is as secure as it can be.
+- Here are a few tips:
+- Don't use your operator
+- machine for risky activities
+- (such as visiting
+- untrustworthy websites
+- or installing unnecessary
+- programs)
+- Keep your operator machine
+- updated
+- with the latest security
+- patches
+- If possible,
+- use a malware and
+- antivirus protection program
+- for your Operating System
+- For maximum security,
+-  you may want to use
+-  a dedicated machine
+-  as your SSH client,
+-  though this may not be
+-  practical for you.
+-  Essential:
+-   Secure your SSH Access
+-   Warning:
+-    If you use your node
+-    locally
+-  (by physically logging
+-  into it with a keyboard
+-  and monitor
+-  directly attached to it),
+-  then this section
+-  is not relevant to you -
+-  you can skip it.
+-  Whether you run your node
+-   at home or use a VPS in a
+-   remote datacenter,
+-   it is likely
+-   that you access it
+-   through SSH,
+-    or that SSH
+-    is enabled
+-    even if you do not use it.
+-    SSH connections
+-    are based on
+-    secure cryptography,
+-    but as with any
+-    secure system,
+-    the real security
+-    comes from using it
+-    correctly.
+-    There are two main things
+-    to do for your SSH settings:
+-    use an SSH key to
+-    log in remotely
+-    instead of a username
+-    and password
+- Disable password-based
+- authentication entirely,
+- so SSH keys are
+- the only remote
+- login option
+- As you are probably
+- familiar with now,
+- the default way
+- to log into your node
+- via SSH
+- is with a username
+- and password.
+- The downside of this
+- is that your password
+- is typically something
+- rather "short" and
+- susceptible to brute-force
+- attacks.
+- Luckily, there is an
+- alternative way to
+- log in via SSH:
+- an SSH key pair.
+- SSH key pairs
+- work similarly
+- to blockchain wallets;
+- they come with
+- a public part
+-  (such as your wallet
+-  address)
+-  and a private part
+-  (the private key
+-  for your wallet address):
+- You provide the public part
+-  to your node.
+-  This way,
+-  the node knows
+-  you're allowed to
+-  connect to it,
+-  and it knows
+-  that it's really you
+-  trying to connect.
+- You keep the private part
+-  to yourself
+-  on your operator machine
+-   This way, you
+-   (and only you)
+-   can connect to your node.
+- You can (and should!)
+- protect the private part
+- with a password,
+- so someone who steals your
+- key can't use it.
+- From a computer's perspective,
+- the private key
+- is exponentially harder
+- to crack than a password is.
+-  This mitigates the risk
+-  of a brute-force attack
+-  against your node.
+-  Tip: If you'd like to learn
+-   more about SSH key pairs
+-   before creating your own,
+-    take a look at these links:
 - https://canvas.cse.taylor.edu/courses/27/pages/ssh-key-tutorial
 - https://www.ssh.com/academy/ssh/host-key
-Creating an SSH Key Pair
-Let's start by creating a new SSH key pair on your operator machine. There are many varieties of key out there, but we're going to use a key type called ed25519 which provides excellent security.
-Run the following command on your operator machine (i.e., you should not run this while already SSH'd into your node machine - if you are, exit out of SSH first):
-ssh-keygen -t ed25519 -C "your_email@example.com"
-You will see the following:
-Generating public/private ed25519 key pair.
-Enter file in which to save the key (/home/username/.ssh/id_ed25519):
-This asks you where you would like to save your private key file. SSH is compatible with the provided default and will automatically use it for you if you select it. However, you have the option of changing it to something else if you wish.
-Note: The path /home/username/.ssh/id_ed25519 is just an example, assuming your username is username. You likely have a different username. Whenever you see a path like the above in this guide, replace it with whatever path your system actually prints with your actual username.
-If you are comfortable with the default setting, simply press Enter. Otherwise, type your desired location for the key. It must be an absolute path (e.g. /home/username/.ssh/eigenlayer_key on Linux, or /Users/username/.ssh/eigenlayer_key on OSX). Press Enter when you’re done.
-After pressing Enter
-, you will see:
-Enter passphrase (empty for no passphrase):
-This will become the password for the private key itself. Whenever you use the key to connect to your node, you will need to enter this password first.
-Warning: You should not leave this blank - otherwise, anyone with the SSH key file will be able to use it! Pick a good password that you (and only you) will know.
-Also, don't forget your password - there is no way to recover this password if you lose it.
-Once you finish typing the password, press Enter. It will ask you to retype it for confirmation.
-After that, you will see something like the following output:
-Your identification has been saved in /home/username/.ssh/id_ed25519
-Your public key has been saved in /home/username/.ssh/id_ed25519.pub
-The key fingerprint is:
-SHA256:CASbPZETiQ83lLhpUO2aoT05TxMVLwqiWtdsRtoPt4s your_email@example.com
-The key's randomart image is:
+- Creating an SSH Key Pair
+- Let's start by creating
+- a new SSH key pair
+- on your operator machine.
+-  There are many varieties
+-  of key out there,
+-  but we're going to use
+-  a key type called ed25519
+-  which provides excellent
+-  security.
+-  Run the following command
+-  on your operator machine (
+-  i.e., you should not run
+-  this while already SSH'd
+-  into your node machine -
+-  if you are,
+-  exit out of SSH first):
+-  ssh-keygen -t
+-  ed25519 -C
+-  "your_email@example.com"
+-  You will see the following:
+-  Generating public/private
+-  ed25519 key pair.
+-  Enter file in which
+-  to save the key
+-  (/home/username/
+-  .ssh/id_ed25519):
+-  This asks you
+-  where you would like
+-  to save your private key
+-  file.
+-  SSH is compatible
+-  with the provided default
+-  and will automatically
+-  use it for you
+-  if you select it.
+-  However, you have the
+-  option of changing it
+-  to something else
+-  if you wish.
+-  Note:
+-  The path /home/username/
+-  .ssh/id_ed25519
+-  is just an example,
+-  assuming your username
+-  is username.
+-  You likely have
+-  a different username.
+-  Whenever you see
+-  a path like the above
+-  in this guide,
+-  replace it with
+-  whatever path
+-  your system actually prints
+-  with your actual username.
+-  If you are comfortable
+-  with the default setting,
+-  simply press Enter.
+-  Otherwise,
+-  type your desired location
+-  for the key.
+-   It must be an absolute path
+-   (e.g. /home/username/
+-   .ssh/eigenlayer_key
+-   on Linux,
+-   or /Users/username/
+-   .ssh/eigenlayer_key
+-   on OSX).
+-   Press Enter
+-   when you’re done.
+-   After pressing Enter
+-    you will see:
+-    Enter passphrase
+-  (empty for no passphrase):
+-  This will become
+-  the password
+-  for the private key itself.
+-  Whenever you use the key
+-  to connect to your node,
+-   you will need to enter
+-   this password first.
+-   Warning: You should not leave
+-   this blank -
+-   otherwise,
+-   anyone with the SSH key
+-   file will be able to use it!
+-    Pick a good password
+-    that you (and only you)
+-    will know.
+-    Also, don't forget your password
+-  - there is no way to recover
+   - this password
+   - if you lose it.
+   - Once you finish typing the
+- password,
+- press Enter.
+- It will ask you
+- to retype it
+- for confirmation.
+- After that,
+- you will see something
+- like the following output:
+- Your identification
+- has been saved
+- in /home/username/
+- .ssh/id_ed25519
+- Your public key
+- has been saved
+- in /home/username/
+- .ssh/id_ed25519.pub
+- The key fingerprint is:
+- SHA256:CASbPZETiQ83lLhpUO2aoT05TxMVLwqiWtdsRtoPt4s your_email@example.com
+- The key's randomart image
+- is:
 +--[ED25519 256]--+
 | .o*==.. |
 |. +=O... |
@@ -328,11 +746,19 @@ The key's randomart image is:
 | . . . |
 | E . |
 +----[SHA256]-----+
-The first line states the location of the private key, which is called id_ed25519
-by default (notice that it does not have a file extension).
-Ubuntu will load this key for you automatically when you use ssh
-if this private key file is in the default location.
-The second line states the location of the public key, which is called id_ed25519.pub
+- The first line states
+- the location of the private
+- key,
+- which is called id_ed25519
+- by default
+-  (notice that it does not
+-  have a file extension).
+-  Ubuntu will load this key
+-  for you automatically
+-  when you use ssh
+-  if this private key file
+-  is in the default location.
+-  The second line states the location of the public key, which is called id_ed25519.pub
 by default.
 We'll need the public key for the next step.
 Note: Ubuntu should load this new key automatically. However, some systems (such as macOS machines) will not load it automatically - you will have to tell it to do this with the following command on your operator machine:
